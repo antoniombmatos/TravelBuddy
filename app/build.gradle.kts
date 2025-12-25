@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.travelbuddy"
-        minSdk = 26 // Cumpre o requisito Android 8.0+
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -40,7 +40,10 @@ dependencies {
     // Retrofit (API REST)
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-    // ADICIONADO: Para ver os logs dos pedidos HTTP e debugging
+
+    // REDE - CORREÇÃO AQUI:
+    // Adicionamos o OkHttp Core para garantir que o Logger funciona
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Coroutines
