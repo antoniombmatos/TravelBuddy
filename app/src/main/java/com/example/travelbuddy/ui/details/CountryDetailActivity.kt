@@ -1,13 +1,13 @@
-package com.example.travelbuddy.data.local.entity
+package com.example.travelbuddy.ui.details
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.travelbuddy.R
 
-@Entity(tableName = "countries")
-data class CountryEntity(
-    @PrimaryKey
-    val isoCode: String,      // PT, ES, FR, etc.
-    val name: String,
-    val continent: String,
-    val flagUrl: String
-)
+class CountryDetailsActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_country_details)
+    }
+}

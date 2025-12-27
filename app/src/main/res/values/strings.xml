@@ -1,3 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">TravelBuddy</string>
+
+    <!-- Menu -->
+    <string name="menu_home">Home</string>
+    <string name="menu_countries">Países</string>
+    <string name="menu_badges">Badges</string>
+    <string name="menu_settings">Definições</string>
+
+    <!-- Login -->
+    <string name="login_title">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_button">Entrar</string>
+
+    <!-- Countries -->
+    <string name="visited">Marcar como visitado</string>
+
 </resources>
