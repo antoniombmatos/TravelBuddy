@@ -11,15 +11,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelBuddy">
+
+        <!-- LOGIN -->
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false" />
+
+        <!-- COUNTRIES -->
+        <activity
+            android:name=".ui.countries.CountriesActivity"
+            android:exported="false" />
+
+        <!-- BADGES -->
+        <activity
+            android:name=".ui.badges.BadgesActivity"
+            android:exported="false" />
+
+        <!-- SETTINGS -->
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:exported="false" />
+
+        <!-- HOME / MAIN -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
