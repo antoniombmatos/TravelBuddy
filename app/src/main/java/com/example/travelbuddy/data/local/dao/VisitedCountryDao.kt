@@ -8,9 +8,12 @@ import com.example.travelbuddy.data.local.entity.VisitedCountryEntity
 @Dao
 interface VisitedCountryDao {
 
+    @Query("SELECT * FROM visited_countries")
+    suspend fun getAllVisited(): List<VisitedCountryEntity>
+
+    @Query("SELECT countryCode FROM visited_countries")
+    suspend fun getVisitedCountryCodes(): List<String>
+
     @Insert
     suspend fun insert(visitedCountry: VisitedCountryEntity)
-
-    @Query("SELECT countryIsoCode FROM visited_countries WHERE userId = :userId")
-    suspend fun getVisitedCountries(userId: Int): List<String>
 }
