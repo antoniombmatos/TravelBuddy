@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
 
     // Endereço para o emulador (corresponde ao localhost do PC)
-    private const val BASE_URL = "http://10.0.2.2:3000/"
+    private const val BASE_URL = "http://192.168.1.179:3000/"
 
     // Configuração do Logger para veres os pedidos no terminal
     private val logging = HttpLoggingInterceptor().apply {
