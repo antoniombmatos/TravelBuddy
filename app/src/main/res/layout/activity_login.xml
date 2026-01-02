@@ -1,29 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@color/white">
 
-    <EditText
-        android:id="@+id/etEmail"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TravelBuddy"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/green_primary"
+        android:layout_marginBottom="48dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:hint="@string/email"
+        android:layout_marginBottom="16dp">
 
-    <EditText
-        android:id="@+id/etPassword"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:hint="@string/password"
+        android:layout_marginBottom="24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/login_button"
+        android:backgroundTint="@color/green_primary"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Entrar" />
+        android:layout_marginTop="16dp"
+        android:text="Não tens conta? Cria uma aqui."
+        android:textColor="@color/text_dark"
+        android:textSize="14sp"/>
+
 </LinearLayout>
