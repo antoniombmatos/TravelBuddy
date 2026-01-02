@@ -27,5 +27,5 @@ port = 3000
 print(f"--- API TravelBuddy a correr na porta {port} ---")
 print("À espera que faças Login no Android...")
 
-server = HTTPServer(('localhost', port), TravelBuddyHandler)
+server = HTTPServer(('0.0.0.0', port), TravelBuddyHandler)
 server.serve_forever()
