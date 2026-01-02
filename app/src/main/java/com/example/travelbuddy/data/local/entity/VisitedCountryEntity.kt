@@ -13,5 +13,6 @@ data class VisitedCountryEntity(
     // ADICIONADO: O campo que faltava para o DAO funcionar
     val userId: Int,
 
+
     val visitedAt: Long = System.currentTimeMillis()
 )
