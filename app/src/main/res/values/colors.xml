@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Brand colors -->
+    <color name="green_primary">#21A179</color>
+    <color name="green_dark">#186A4C</color>
+    <color name="green_light">#A7E7D3</color>
+
+    <!-- Neutral -->
+    <color name="white">#FFFFFF</color>
+    <color name="background">#FFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_dark">#0B2F23</color>
+    <color name="text_light">#FFFFFF</color>
+
 </resources>
