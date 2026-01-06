@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.travelbuddy.data.remote.ApiClient
+import com.example.travelbuddy.data.remote.api.ApiClient
+import com.example.travelbuddy.data.remote.auth.AuthApiClient
 import com.example.travelbuddy.databinding.ActivityLoginBinding
 import com.example.travelbuddy.ui.main.MainActivity
 import com.example.travelbuddy.utils.SessionManager
@@ -23,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         session = SessionManager(this)
-        val api = ApiClient.apiService
+        val api = AuthApiClient.apiService
 
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()

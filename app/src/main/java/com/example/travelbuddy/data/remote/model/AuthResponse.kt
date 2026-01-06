@@ -1,4 +1,4 @@
-package com.example.travelbuddy.data.remote.model
+package com.example.travelbuddy.data.remote.auth.model
 
 data class AuthResponse(
     val id: Int,

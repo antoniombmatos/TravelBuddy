@@ -14,6 +14,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login_button">Entrar</string>
+    <string name="create_account">Ainda não tens conta? Cria aqui</string>
 
     <!-- Countries -->
     <string name="visited">Marcar como visitado</string>
