@@ -18,4 +18,21 @@
     <!-- Countries -->
     <string name="visited">Marcar como visitado</string>
 
+    <!-- Registo -->
+    <string name="register_title">Criar Conta</string>
+    <string name="name">Nome</string>
+    <string name="register_button">Registar</string>
+
+    <!-- Mensagens -->
+    <string name="error_invalid_email">Por favor insira um e-mail válido.</string>
+    <string name="error_invalid_password">Password tem de ter pelo menos 8 caracteres.</string>
+    <string name="error_invalid_credentials">Email ou password inválidos.</string>
+    <string name="error_not_authenticated">Utilizador não autenticado</string>
+
+    <string name="login_success">Login efetuado com sucesso</string>
+    <string name="register_success">Conta criada com sucesso</string>
+
+    <!-- Countries -->
+    <string name="country_unknown">Desconhecido</string>
+
 </resources>

@@ -1,17 +1,18 @@
 package com.example.travelbuddy.data.remote
 
-import com.example.travelbuddy.data.local.entity.UserEntity
+import com.example.travelbuddy.data.remote.model.AuthResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ApiService {
 
-    // Rota para Login
-    // Envia um MAP (JSON) com email/password e recebe um UserEntity se tiver sucesso
     @POST("auth/login")
-    suspend fun login(@Body credentials: Map<String, String>): UserEntity?
+    suspend fun login(
+        @Body credentials: Map<String, String>
+    ): AuthResponse
 
-    // Rota para Registar
     @POST("auth/register")
-    suspend fun register(@Body user: UserEntity): UserEntity?
+    suspend fun register(
+        @Body user: Map<String, String>
+    ): AuthResponse
 }
