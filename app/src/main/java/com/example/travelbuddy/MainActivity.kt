@@ -66,8 +66,14 @@ class MainActivity : AppCompatActivity(), LocationListener {
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
         } else {
-            // Atualiza a cada 5 segundos ou 5 metros
+            // 1. REQUISITO DO PROFESSOR (Hardware GPS) - Continua aqui!
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, 5f, this)
+
+            // 2. O TRUQUE PARA FUNCIONAR NO QUARTO (Network)
+            // Se o provider de Rede estiver ligado, pedimos também a ele.
+            if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000L, 5f, this)
+            }
         }
     }
 
