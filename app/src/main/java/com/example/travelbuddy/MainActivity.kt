@@ -19,12 +19,11 @@ import com.example.travelbuddy.ui.countries.CountriesActivity
 import com.example.travelbuddy.ui.settings.SettingsActivity
 import java.util.Locale
 
-// 1. Adicionamos a interface LocationListener
 class MainActivity : AppCompatActivity(), LocationListener {
 
     private lateinit var binding: ActivityMainBinding
 
-    // 2. Variáveis para o GPS (Vêm do PDF '5. Sensores.pdf', pág. 6)
+    // Variáveis para o GPS
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
 
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         setupBottomNavigation()
 
-        // 3. Chamamos a função para iniciar o GPS logo que a app abre
+        // Iniciar GPS
         getLocation()
     }
 
@@ -61,41 +60,36 @@ class MainActivity : AppCompatActivity(), LocationListener {
         }
     }
 
-    // 4. Função para pedir permissão e iniciar updates (Baseado no PDF '5. Sensores.pdf', pág. 7)
     private fun getLocation() {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        // Verifica se já temos permissão
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            // Se não, pede permissão ao utilizador
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
         } else {
-            // Se sim, pede atualizações de GPS (Min: 5 segundos, 5 metros)
+            // Atualiza a cada 5 segundos ou 5 metros
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, 5f, this)
         }
     }
 
-    // 5. O que acontece quando o GPS deteta mudança (Baseado no PDF '5. Sensores.pdf', pág. 6)
     override fun onLocationChanged(location: Location) {
-        // Temos as coordenadas!
         val lat = location.latitude
         val long = location.longitude
 
-        // Extra: Converter números em Nome do País (Geocoder)
         try {
             val geocoder = Geocoder(this, Locale.getDefault())
             val addresses = geocoder.getFromLocation(lat, long, 1)
 
             if (addresses != null && addresses.isNotEmpty()) {
-                val country = addresses[0].countryName // Ex: "Portugal"
+                val country = addresses[0].countryName
 
-                // Mostra um aviso ao utilizador
+                // --- AQUI ESTÁ A MUDANÇA ---
+                // Atualiza o texto no ecrã principal
+                binding.tvHome.text = "📍 Estás em: $country"
+
+                // Mantemos o Toast também para teres a certeza
                 Toast.makeText(this, "Bem-vindo a $country!", Toast.LENGTH_LONG).show()
 
-                // Opcional: Atualizar um TextView na tua Home se tiveres
-                // binding.tvLocation.text = "Estás em: $country"
-
-                // Para poupar bateria, paramos de pedir localização depois de encontrar a primeira vez
+                // Para o GPS para poupar bateria
                 locationManager.removeUpdates(this)
             }
         } catch (e: Exception) {
@@ -103,20 +97,18 @@ class MainActivity : AppCompatActivity(), LocationListener {
         }
     }
 
-    // 6. Tratar a resposta do utilizador ao pedido de permissão (Baseado no PDF '5. Sensores.pdf', pág. 6)
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == locationPermissionCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permissão de GPS Concedida", Toast.LENGTH_SHORT).show()
-                getLocation() // Tenta ligar de novo agora que já deixaram
+                getLocation()
             } else {
                 Toast.makeText(this, "Permissão Negada", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    // Métodos obrigatórios da interface LocationListener (podem ficar vazios)
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
     override fun onProviderEnabled(provider: String) {}
     override fun onProviderDisabled(provider: String) {}
