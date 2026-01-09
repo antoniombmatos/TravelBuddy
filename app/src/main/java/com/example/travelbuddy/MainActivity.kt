@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         setupBottomNavigation()
 
-        // Iniciar GPS
+        // Iniciar  GPS
         getLocation()
     }
 
