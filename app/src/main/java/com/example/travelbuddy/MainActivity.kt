@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     override fun onLocationChanged(location: Location) {
         val lat = location.latitude
         val long = location.longitude
-        val source = location.provider // Vai dizer "gps" ou "network"
+        val source = location.provider
 
         try {
             val geocoder = Geocoder(this, Locale.getDefault())
@@ -88,26 +88,40 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
             if (addresses != null && addresses.isNotEmpty()) {
                 val address = addresses[0]
-                val country = address.countryName      // Ex: Portugal
-                val city = address.locality            // Ex: Lisboa (ou null se for aldeia)
-                val district = address.adminArea       // Ex: Distrito de Lisboa
 
-                // Lógica para ficar bonito: Se tiver cidade, mostra cidade. Se não, mostra distrito.
-                val localExato = city ?: district ?: "Local Desconhecido"
+                // --- DADOS BÁSICOS ---
+                val country = address.countryName      // "Portugal"
+                val place = address.locality ?: address.subLocality ?: address.adminArea // "Calvaria de Cima"
 
-                // 1. ATUALIZA O TEXTO (Fica mais bonito: "Lisboa, Portugal")
-                binding.tvHome.text = "📍 $localExato, $country"
+                // --- DETALHES EXTRA (PODEM SER NULL) ---
+                val street = address.thoroughfare      // Ex: "Rua Principal"
+                val number = address.subThoroughfare   // Ex: "12A" (Número da porta)
+                val postalCode = address.postalCode    // Ex: "2480-000"
 
-                // 2. PROVA TÉCNICA (Diz-te quem achou: GPS ou Rede)
-                // Isto serve para tu confirmares aos professores que o hardware está a ser usado
-                Toast.makeText(this, "Localizado via: $source", Toast.LENGTH_LONG).show()
+                // --- CONSTRUIR A FRASE ---
+                // Vamos tentar fazer: "Rua Principal 12A, Calvaria de Cima"
+                val fullLocation = StringBuilder()
 
-                // Para o GPS para poupar bateria
+                if (street != null) {
+                    fullLocation.append(street)
+                    if (number != null) fullLocation.append(" $number")
+                    fullLocation.append(", ")
+                }
+
+                fullLocation.append(place)
+                // Se quiseres ser muito detalhado, descomenta a linha de baixo:
+                // if (postalCode != null) fullLocation.append(" ($postalCode)")
+
+                // Atualiza o Ecrã
+                binding.tvHome.text = "📍 $fullLocation"
+
+                // Atualiza o Toast para mostrar o país também
+                Toast.makeText(this, "GPS: $place, $country ($source)", Toast.LENGTH_LONG).show()
+
                 locationManager.removeUpdates(this)
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            // Se falhar a tradução do nome, mostramos só as coordenadas
             binding.tvHome.text = "📍 $lat, $long"
         }
     }
