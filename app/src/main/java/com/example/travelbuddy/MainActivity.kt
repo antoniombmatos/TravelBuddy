@@ -80,26 +80,35 @@ class MainActivity : AppCompatActivity(), LocationListener {
     override fun onLocationChanged(location: Location) {
         val lat = location.latitude
         val long = location.longitude
+        val source = location.provider // Vai dizer "gps" ou "network"
 
         try {
             val geocoder = Geocoder(this, Locale.getDefault())
             val addresses = geocoder.getFromLocation(lat, long, 1)
 
             if (addresses != null && addresses.isNotEmpty()) {
-                val country = addresses[0].countryName
+                val address = addresses[0]
+                val country = address.countryName      // Ex: Portugal
+                val city = address.locality            // Ex: Lisboa (ou null se for aldeia)
+                val district = address.adminArea       // Ex: Distrito de Lisboa
 
-                // --- AQUI ESTÁ A MUDANÇA ---
-                // Atualiza o texto no ecrã principal
-                binding.tvHome.text = "📍 Estás em: $country"
+                // Lógica para ficar bonito: Se tiver cidade, mostra cidade. Se não, mostra distrito.
+                val localExato = city ?: district ?: "Local Desconhecido"
 
-                // Mantemos o Toast também para teres a certeza
-                Toast.makeText(this, "Bem-vindo a $country!", Toast.LENGTH_LONG).show()
+                // 1. ATUALIZA O TEXTO (Fica mais bonito: "Lisboa, Portugal")
+                binding.tvHome.text = "📍 $localExato, $country"
+
+                // 2. PROVA TÉCNICA (Diz-te quem achou: GPS ou Rede)
+                // Isto serve para tu confirmares aos professores que o hardware está a ser usado
+                Toast.makeText(this, "Localizado via: $source", Toast.LENGTH_LONG).show()
 
                 // Para o GPS para poupar bateria
                 locationManager.removeUpdates(this)
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            // Se falhar a tradução do nome, mostramos só as coordenadas
+            binding.tvHome.text = "📍 $lat, $long"
         }
     }
 
